@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}計画追加 - {{project.ptitle}}  - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>計画追加 - {{project.title}}</h1>
+
+<form method="post" action="/plan_add/{{project.pid}}">
+<table class="desc">
+    <tr><th>計画タイトル</th><td><input type="text" name="ptitle" value=""></td></tr>
+    <tr><th>内容</th><td><textarea name="pbody" ></textarea></td></tr>
+</table>
+<input type="submit" value="追加">
+</form>
+
+<a href="/project/{{project.pid}}" class="btn">プロジェクトに戻る</a>
+
+{% endblock %}

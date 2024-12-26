@@ -4,12 +4,17 @@
 
 <h1>{{project.title}}</h1>
 
+<form method="post" action="/project/{{project.pid}}">
 <table class="desc">
-    <tr><th>カテゴリ</th><td>{{project.category}}</td></tr>
-    <tr><th>概要</th><td>{{project.desc}}</td></tr>
+    <tr><th>タイトル</th><td><input type="text" name="title" value="{{project.title}}"></td></tr>
+    <tr><th>カテゴリ</th><td><input type="text" name="category" value="{{project.category}}"></td></tr>
+    <tr><th>概要</th><td><textarea name="desc">{{project.desc}}</textarea></td></tr>
 </table>
+<input type="submit" value="更新">
+</form>
 
 <h3>計画</h3>
+<a href="/plan_add/{{project.pid}}" class="btn">新規計画</a>
 <table id="plist">
     <tr><th>タイトル</th><th>完成度</th><th>登録日</th></tr>
     {% for r in project.plan %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{plan.ptitle}} - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>{{plan.ptitle}}</h1>
+
+<table class="desc">
+    <tr><th>タイトル</th><td>{{plan.ptitle}}</td></tr>
+    <tr><th>完成度</th><td>{{plan.prate}}</td></tr>
+    <tr><th>内容</th><td>{{plan.pbody}}</td></tr>
+</table>
+
+<a href="/project/{{plan.pid}}" class="btn">プロジェクトに戻る</a>
+
+{% endblock %}

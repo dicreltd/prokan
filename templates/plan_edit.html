@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{plan.ptitle}} - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>{{plan.ptitle}}</h1>
+
+<form method="post" action="/plan/{{plan.planid}}">
+<table class="desc">
+    <tr><th>タイトル</th><td><input type="text" name="ptitle" value="{{plan.ptitle}}"></td></tr>
+    <tr><th>完成度</th><td><input type="number" name="prate" value="{{plan.prate}}"></td></tr>
+    <tr><th>内容</th><td><textarea name="pbody" >{{plan.pbody}}</textarea></td></tr>
+</table>
+<input type="submit" value="更新">
+</form>
+
+<a href="/project/{{plan.pid}}" class="btn">プロジェクトに戻る</a>
+
+{% endblock %}

@@ -100,7 +100,20 @@ def index():
 @app.get('/project/<pid>')
 def project(pid):
     row = Project.query.get_or_404(pid)
-    return render_template("project.html", project=row)
+    
+    if is_myproject(row.pid):
+        return render_template("project_edit.html",project=row)
+    else:
+        return render_template("project.html",project=row)
+
+@app.post('/project/<pid>')
+def project_post(pid):
+    row = Project.query.get_or_404(pid)
+    row.title = request.form['title']
+    row.desc = request.form['desc']
+    row.category = request.form['category']
+    db.session.commit()
+    return redirect(f"/")
 
 @app.get('/user/<uid>')
 def user(uid):
@@ -125,35 +138,51 @@ def login_post():
         session['uid'] = row.uid
         return redirect("/")
 
+
 @app.get('/logout')
 def logout():
     session.pop('uid', None)
     return redirect("/")
 
 
-@app.get('/update_project/<pid>')
-def update_project_get(pid):
-    row = Project.query.get_or_404(pid)
-    return render_template("update_project.html",toukou=row)
+def is_myproject(pid):
+    row = Member.query.filter(Member.pid==pid, Member.uid == session['uid']).first()
+    return row is not None
 
-@app.post('/update_project/<pid>')
-def update_project_post(tid):
-    row = Project.query.get_or_404(tid)
-    row.mes = request.form['mes']
+
+@app.get('/plan/<planid>')
+def plan_get(planid):
+    row = Plan.query.get_or_404(planid)
+    if is_myproject(row.pid):
+        return render_template("plan_edit.html",plan=row)
+    else:
+        return render_template("plan.html",plan=row)
+        
+
+@app.post('/plan/<planid>')
+def plan_post(planid):
+    row = Plan.query.get_or_404(planid)
+    if is_myproject(row.pid)==False:
+        return redirect(r'/login')
+    
+    row.ptitle = request.form['ptitle'];
+    row.prate = request.form['prate'];
+    row.pbody = request.form['pbody'];
+    row.plan_at = datetime.now()
     db.session.commit()
     return redirect(f"/project/{row.pid}")
 
-@app.get('/plan/<pid>')
-def plan_get(pid):
-    row = Plan.query.get_or_404(pid)
-    return render_template("plan.html",toukou=row)
+@app.get('/plan_add/<pid>')
+def plan_add_get(pid):
+    row = Project.query.get_or_404(pid)
+    return render_template("plan_add.html",project=row)
 
 @app.post('/plan_add/<pid>')
 def plan_add_post(pid):
     row = Plan(
         pid = pid,
         ptitle = request.form['ptitle'],
-        pbody = request.form['body'],
+        pbody = request.form['pbody'],
     )
     db.session.add(row)
     db.session.commit()
