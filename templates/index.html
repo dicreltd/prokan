@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}プロジェクト管理{% endblock %}
+
+{% block main %}
+    <table id="plist">
+        <tr><th>タイトル</th><th>カテゴリ</th><th>登録日</th></tr>
+        {% for r in rows %}
+        <tr>
+            <td class="title"><a href="/project/{{r.pid}}">{{r.title}}</a></div>
+            <td class="category">{{r.category}}</a></div>
+            <td class="hi">{{r.updated_at.strftime('%Y/%m/%d %H:%M:%S')}}</div>
+        </tr>
+        {% endfor %}
+    </table>
+    
+{% endblock %}

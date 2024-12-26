@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}{{project.title}} - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>{{project.title}}</h1>
+
+<table class="desc">
+    <tr><th>カテゴリ</th><td>{{project.category}}</td></tr>
+    <tr><th>概要</th><td>{{project.desc}}</td></tr>
+</table>
+
+<h3>計画</h3>
+<table id="plist">
+    <tr><th>タイトル</th><th>登録日</th></tr>
+    {% for r in project.plan %}
+    <tr>
+        <td class="title"><a href="/plan/{{r.prid}}">{{r.ptitle}}</a></div>
+        <td class="hi">{{r.plan_at.strftime('%Y/%m/%d %H:%M:%S')}}</div>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

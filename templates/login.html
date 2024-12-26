@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}ログイン{% endblock %}
+
+{% block main %}
+
+<h1>ログイン</h1>
+
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+<form action="/login" method="post" >
+<input type="text" name="uname" placeholder="ユーザ名" required><br>
+<input type="password" name="upass" placeholder="パスワード" required><br>
+<input type="submit" value="ログイン">
+</form>
+
+<a href="/regist">ユーザ登録</a>
+
+    
+{% endblock %}

@@ -1,0 +1,81 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: beige;
+}
+main {
+    padding: 1em 10%;
+}
+header {
+    padding: 0.5em 10% ;
+    background-color:white;
+    display: flex;
+    justify-content: space-between;
+}
+header a{
+    text-decoration: none;
+    color:gray;
+}
+header h2 {
+    margin: 0;
+    font-size: medium;
+}
+form {
+    margin: 1em;
+}
+
+input[type="text"], input[type="password"] {
+    padding: 0.5em;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    width: 20em;
+    margin-bottom:0.5em;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.operation {
+    display: flex;
+    gap: 1em;
+    margin: 1em;
+}
+
+.operation a {
+    text-decoration: none;
+    padding: 0.5em 1em;
+    border-radius: 4px;
+}
+
+.operation .update {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.operation .del, input.del {
+    background-color: #f44336;
+    color: white;
+}
+
+.operation a:hover, input[type="submit"]:hover {
+    opacity: 0.8;
+}
+
+table {
+    border-collapse: collapse;
+    margin: 1em auto;
+}
+td,th {
+    border:1px solid gray;
+    padding: 0.2em 1em;
+}
+th {
+    background-color: #4CAF50;
+    color:white;
+}
