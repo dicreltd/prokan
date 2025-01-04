@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}ユーザ管理 - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>ユーザ管理</h1>
+
+<table id="list">
+    <tr><th>名前</th><th>プロジェクト</th><th>進捗</th></tr>
+    {% for r in rows %}
+    <tr>
+        <td class="title">{{r.uname}}</div>
+            <td class="title">
+                {% if r.member %}
+                    {%for m in r.member%}  
+                        <a href="/project/{{m.project.pid}}">{{m.project.title}}</a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        <td class="title"><a href="/preport_admin/{{r.uid}}">進捗</a></div>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

@@ -28,6 +28,7 @@ class Project(db.Model):
     category = db.Column(db.String(255))
     desc = db.Column(db.String(65545))
     updated_at = db.Column(db.DateTime, default=datetime.now)
+    comment = db.Column(db.String(65545))
 
     member = db.relationship('Member', backref='project', lazy=True)
     plan = db.relationship('Plan', backref='project', lazy=True)
@@ -60,6 +61,7 @@ class Plan(db.Model):
     pbody = db.Column(db.String(65545))
     prate = db.Column(db.Integer, default=0)
     plan_at = db.Column(db.DateTime, default=datetime.now)
+    comment = db.Column(db.String(65545))
 
     def __init__(self,pid,ptitle,pbody):
         self.pid = pid
@@ -75,6 +77,7 @@ class Preport(db.Model):
     rtitle = db.Column(db.String(2048))
     content = db.Column(db.String(2048))
     pr_at = db.Column(db.DateTime, default=datetime.now)
+    comment = db.Column(db.String(65545))
 
     def __init__(self,uid,rtitle,content):
         self.uid = uid
@@ -90,13 +93,14 @@ with app.app_context():
 
     # 初期データ追加
     data = [
+        User(uname="skohara", upass="kensyu2023"),
         User(uname="tanaka", upass="aaa"),
         User(uname="yamada", upass="bbb"),
         Project(title="テストプロジェクト1", category="Web開発",desc="テスト1"),
         Project(title="テストプロジェクト2", category="データ分析",desc="テスト2"),
         Plan(pid=1, ptitle="基本設計", pbody="基本的な設計"),
         Member(uid=2, pid=1),
-        Member(uid=1, pid=2),
+        Member(uid=3, pid=2),
         
     ]
     db.session.add_all(data)

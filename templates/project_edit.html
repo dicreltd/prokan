@@ -4,17 +4,42 @@
 
 <h1>{{project.title}}</h1>
 
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
 <form method="post" action="/project/{{project.pid}}">
 <table class="desc">
     <tr><th>タイトル</th><td><input type="text" name="title" value="{{project.title}}"></td></tr>
     <tr><th>カテゴリ</th><td><input type="text" name="category" value="{{project.category}}"></td></tr>
+    <tr><th>参加者</th><td>
+        <ul>
+        {% for m in project.member %}
+        <li><a href="/member/{{m.mid}}">{{m.user.uname}}</a></li>
+        {% endfor %}
+        </ul>
+    </td>
+
+    </tr>
     <tr><th>概要</th><td><textarea name="desc">{{project.desc}}</textarea></td></tr>
+    <tr><th>講師コメント</th><td><pre>{{project.comment}}</pre></td></tr>
 </table>
+<div class="operation">
 <input type="submit" value="更新">
+</div>
 </form>
 
+{% if user.uid == 1 %}
+<form action="/pcomment/{{project.pid}}" method="post">
+    <textarea name="comment" placeholder="講師コメント">{{project.comment}}</textarea><br>
+    <input type="submit" value="更新">
+</form>
+{% endif %}
+
 <h3>計画</h3>
+<div class="operation">
 <a href="/plan_add/{{project.pid}}" class="btn">新規計画</a>
+</div>
 <table id="plist">
     <tr><th>タイトル</th><th>完成度</th><th>登録日</th></tr>
     {% for r in project.plan %}
@@ -26,5 +51,10 @@
     {% endfor %}
 </table>
 
+<h3>メンバー追加</h3>
+<form action="/member_add/{{project.pid}}" method="post">
+    <input type="text" name="uname" placeholder="名前" style="width:8em">
+    <input type="submit" value="追加">
+</form>
 
 {% endblock %}

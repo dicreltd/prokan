@@ -2,7 +2,31 @@
 {% block title %}プロジェクト管理{% endblock %}
 
 {% block main %}
-    <table id="plist">
+    <p>{{user.uname}}でログイン中</p>
+
+    <h2>マイプロジェクト</h2>
+    {% if user.member %}
+        <table class="plist">
+        <tr><th>タイトル</th><th>カテゴリ</th><th>登録日</th></tr>
+        {% for m in user.member %}
+        <tr>
+            <td class="title"><a href="/project/{{m.project.pid}}">{{m.project.title}}</a></div>
+            <td class="category">{{m.project.category}}</a></div>
+            <td class="hi">{{m.project.updated_at.strftime('%Y/%m/%d %H:%M:%S')}}</div>
+        </tr>
+        {% endfor %}
+    {% else %}
+
+    <div>
+        <p>プロジェクトに参加していません。既存のプロジェクトに参加を申し入れるか、新規プロジェクトを作成してください。</p>
+        <p><a href="/project_add" class="btn">新規プロジェクト作成</a></p>
+    </div>
+    {% endif %}
+    </table>
+
+
+    <h2>プロジェクト一覧</h2>
+    <table class="plist">
         <tr><th>タイトル</th><th>カテゴリ</th><th>登録日</th></tr>
         {% for r in rows %}
         <tr>
@@ -12,5 +36,6 @@
         </tr>
         {% endfor %}
     </table>
-    
+
+    </div>
 {% endblock %}

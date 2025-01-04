@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}進捗報告追加 - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>進捗報告追加</h1>
+
+<form method="post" action="/preport_add">
+<table class="desc">
+    <tr><th>タイトル</th><td>
+        <select name="rtitle">
+            <option>１日目午前</option>
+            <option>１日目午後</option>
+            <option>２日目午前</option>
+            <option>２日目午後</option>
+            <option>３日目午前</option>
+            <option>３日目午後</option>
+            <option>４日目午前</option>
+            <option>４日目午後</option>
+        </select>
+    </td></tr>
+    <tr><th>内容</th><td><textarea name="content" ></textarea></td></tr>
+</table>
+<input type="submit" value="追加">
+</form>
+
+<a href="/preport" class="btn">進捗一覧に戻る</a>
+
+{% endblock %}

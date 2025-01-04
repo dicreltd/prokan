@@ -6,7 +6,15 @@
 
 <table class="desc">
     <tr><th>カテゴリ</th><td>{{project.category}}</td></tr>
-    <tr><th>概要</th><td>{{project.desc}}</td></tr>
+    <tr><th>参加者</th><td>
+        <ul>
+        {% for m in project.member %}
+        <li>{{m.user.uname}}</li>
+        {% endfor %}
+        </ul>
+    </td></tr>
+    <tr><th>概要</th><td><pre>{{project.desc}}</pre></td></tr>
+    <tr><th>講師コメント</th><td><pre>{{project.comment}}</pre></td></tr>
 </table>
 
 <h3>計画</h3>

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}進捗報告変更 - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>進捗報告変更</h1>
+
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+<form method="post" action="/preport/{{preport.prid}}">
+<table class="desc">
+    <tr><th>タイトル</th><td><input type="text" name="rtitle" value="{{preport.rtitle}}"></td></tr>
+    <tr><th>内容</th><td><textarea name="content" >{{preport.content}}</textarea></td></tr>
+    <tr><th>講師コメント</th><td><pre>{{preport.comment}}</pre></td></tr>
+</table>
+<div class="operation">
+    <input type="submit" value="更新">
+</div>
+</form>
+
+{% if user.uid == 1 %}
+<form action="/prcomment/{{preport.prid}}" method="post">
+    <textarea name="comment" placeholder="講師コメント">{{preport.comment}}</textarea><br>
+    <input type="submit" value="更新">
+</form>
+{% endif %}
+
+
+<a href="/preport" class="btn">進捗一覧に戻る</a>
+
+{% endblock %}

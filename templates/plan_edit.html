@@ -7,11 +7,23 @@
 <form method="post" action="/plan/{{plan.planid}}">
 <table class="desc">
     <tr><th>タイトル</th><td><input type="text" name="ptitle" value="{{plan.ptitle}}"></td></tr>
-    <tr><th>完成度</th><td><input type="number" name="prate" value="{{plan.prate}}"></td></tr>
-    <tr><th>内容</th><td><textarea name="pbody" >{{plan.pbody}}</textarea></td></tr>
+    <tr><th>完成度</th><td><input type="number" name="prate" value="{{plan.prate}}" placeholder="例：10%">%</td></tr>
+    <tr><th>内容</th><td><textarea name="pbody" ><pre>{{plan.pbody}}</pre></textarea></td></tr>
+    <tr><th>講師コメント</th><td><pre>{{plan.comment}}</pre></td></tr>
 </table>
+<div class="operation">
 <input type="submit" value="更新">
+</div>
 </form>
+
+{% if user.uid == 1 %}
+<form action="/plancomment/{{plan.pid}}" method="post">
+    <textarea name="comment" placeholder="講師コメント">{{plan.comment}}</textarea><br>
+    <input type="submit" value="更新">
+</form>
+{% endif %}
+
+
 
 <a href="/project/{{plan.pid}}" class="btn">プロジェクトに戻る</a>
 

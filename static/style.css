@@ -24,12 +24,17 @@ form {
     margin: 1em;
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="number"],select {
     padding: 0.5em;
     border: 1px solid lightgray;
     border-radius: 4px;
     width: 20em;
     margin-bottom:0.5em;
+}
+
+input[type="number"] {
+    width: 5em;
+    text-align: right;
 }
 
 input[type="submit"] {
@@ -41,10 +46,17 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+textarea {
+    width: 30em;
+    height: 8em;
+    max-width: 100%;
+}
+
 .operation {
     display: flex;
     gap: 1em;
     margin: 1em;
+    justify-content: center;
 }
 
 .operation a {
@@ -53,7 +65,12 @@ input[type="submit"] {
     border-radius: 4px;
 }
 
-.operation .update {
+.operation .btn{
+    background-color: blue;
+    color: white;
+}
+
+.operation .update{
     background-color: #4CAF50;
     color: white;
 }

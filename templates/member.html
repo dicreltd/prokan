@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}参加管理 - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>参加管理</h1>
+
+<table class="desc">
+    <tr><th>プロジェクト</th><td>{{member.project.title}}</td></tr>
+    <tr><th>ユーザ名</th><td>{{member.user.uname}}</td></tr>
+</table>
+<div class="operation">
+    <form method="post" action="/member_del/{{member.mid}}">
+    <input type="submit" value="解除">
+    </form>
+</div>
+
+<a href="/project/{{member.pid}}" class="btn">プロジェクトに戻る</a>
+
+{% endblock %}

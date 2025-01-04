@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}プロジェクト追加 - プロジェクト管理{% endblock %}
+{% block main %}
+
+<h1>プロジェクト追加</h1>
+
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
+<p>プロジェクト演習で何を行うかを決定します。</p>
+<form method="post" action="/project_add">
+<table class="desc">
+    <tr><th>タイトル</th><td><input type="text" name="title" value="" placeholder="例：クイズサイト作成"></td></tr>
+    <tr><th>カテゴリ</th><td>
+        <select name="category">
+            <option>Webサイト開発</option>
+            <option>AIアプリケーション</option>
+            <option>データ分析</option>
+            <option>その他</option>
+        </select>
+    </td></tr>
+    <tr><th>概要</th><td><textarea name="desc" placeholder="例：四択のクイズサイト"></textarea></td></tr>
+</table>
+<div class="operation">
+<input type="submit" value="追加">
+</div>
+</form>
+
+
+{% endblock %}
