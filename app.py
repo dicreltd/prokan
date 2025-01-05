@@ -3,12 +3,24 @@ from flask import Flask,render_template,request,redirect,session,flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import uuid
+import markdown2
+from markupsafe import Markup
 
 app = Flask(__name__)
 app.secret_key = b'>\x81:2yzVm6{j\x88\xc4\x99\xd5\x0f'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///prokan.db'
 db = SQLAlchemy(app)
+
+def md_to_html(text):
+    """
+    MarkdownテキストをHTMLに変換する関数
+    """
+    return Markup(markdown2.markdown(text))
+
+# Jinja2テンプレートで使用できるようにフィルターとして登録
+app.jinja_env.filters['markdown'] = md_to_html
+
 
 class User(db.Model):
     uid = db.Column(db.Integer, primary_key=True)
@@ -63,6 +75,7 @@ class Plan(db.Model):
     ptitle = db.Column(db.String(255))
     pbody = db.Column(db.String(65545))
     prate = db.Column(db.Integer, default=0)
+    url = db.Column(db.String(255))
     plan_at = db.Column(db.DateTime, default=datetime.now)
     comment = db.Column(db.String(65545))
 

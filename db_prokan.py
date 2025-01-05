@@ -60,6 +60,7 @@ class Plan(db.Model):
     ptitle = db.Column(db.String(255))
     pbody = db.Column(db.String(65545))
     prate = db.Column(db.Integer, default=0)
+    url = db.Column(db.String(255))
     plan_at = db.Column(db.DateTime, default=datetime.now)
     comment = db.Column(db.String(65545))
 
@@ -67,6 +68,7 @@ class Plan(db.Model):
         self.pid = pid
         self.ptitle = ptitle
         self.pbody = pbody
+        self.url = ""
 
     def __str__(self):
         return f"{self.pid} {self.ptitle} {self.pbody} {self.prate} {self.plan_at}"    
