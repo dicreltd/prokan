@@ -402,4 +402,5 @@ def prcomment_post(prid):
     return redirect(f"/preport/{prid}")
 
 
-app.run(host='0.0.0.0',port=8883)
+if __name__ == "__main__":
+    app.run(host='0.0.0.0',port=8885)
