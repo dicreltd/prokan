@@ -18,7 +18,7 @@
 </form>
 
 {% if user.uid == 1 %}
-<form action="/plancomment/{{plan.pid}}" method="post">
+<form action="/plancomment/{{plan.planid}}" method="post">
     <textarea name="comment" placeholder="講師コメント">{{plan.comment}}</textarea><br>
     <input type="submit" value="更新">
 </form>
