@@ -15,7 +15,11 @@
     <tr><th>参加者</th><td>
         <ul>
         {% for m in project.member %}
-        <li><a href="/member/{{m.mid}}">{{m.user.uname}}</a></li>
+            {% if m.user.uid == session.uid or session.uid == 1 %}
+                <li><a href="/member/{{m.mid}}">{{m.user.uname}}</a></li>
+            {% else %}
+                <li>{{m.user.uname}}</li>
+            {% endif %}
         {% endfor %}
         </ul>
     </td>

@@ -18,7 +18,7 @@
     {% else %}
 
     <div>
-        <p>プロジェクトに参加していません。既存のプロジェクトに参加を申し入れるか、新規プロジェクトを作成してください。</p>
+        <p>プロジェクトに参加していません。新規プロジェクトを作成するか、既存のプロジェクトのメンバーに参加を申し入れてください。</p>
         <p><a href="/project_add" class="btn">新規プロジェクト作成</a></p>
     </div>
     {% endif %}
@@ -36,6 +36,40 @@
         </tr>
         {% endfor %}
     </table>
+
+    <h2>プロジェクトの例</h2>
+
+    <h3>Webサイト開発</h3>
+    <p>Flaskとデータベースを利用しWebアプリケーションを開発する。<br>
+    例：SNS、クイズサイト、掲示板、書籍管理 など</p>
+    <ul>
+    <li><a href="http://www.dicre.com/python/flask/">Flask</a></li>
+    </ul>
+    <h3>AIアプリケーション</h3>
+    <p>AIを利用したアプリケーションなどを開発する。<br>
+    例：特定用途向け会話AI（LLM）、画像を学習させ認識させる、データを学習させ予測させるなど</p>
+    <ul>
+    <li><a href="http://www.dicre.com/python/llm/">LLM</a></li>
+    <li><a href="http://www.dicre.com/python/ml/">機械学習</a></li>
+    <li><a href="http://www.dicre.com/python/deep/">ディープラーニング</a></li>
+    <li><a href="http://www.dicre.com/python/image.html">画像</a></li>
+    </ul>
+    <h3>データ分析</h3>
+    <p>公開データを分析し、仮説、検証を行う。<br>
+    例：早生まれはスポーツが苦手かを検証、肉の売上の地域差の検証など</p>
+    <ul>
+    <li><a href="http://www.dicre.com/python/ds">データサイエンス</a></li>
+    <li><a href="http://www.dicre.com/python/map/">地図</a></li>
+    <li><a href="http://www.dicre.com/python/nlp/">自然言語処理</a></li>
+    <li><a href="http://www.dicre.com/python/streamlit/">Streamlit</a></li>
+    </ul>
+    <h3>その他開発</h3>
+    <p>そのほかの開発。</p>
+    <ul>
+    <li><a href="http://www.dicre.com/python/gui.html">Windowsアプリ</a></li>
+    <li><a href="http://www.dicre.com/python/pygame/">2Dゲーム</a></li>
+    <li><a href="http://www.dicre.com/python/pyexcel.html">Excel</a></li>
+    </ul>
 
     </div>
 {% endblock %}

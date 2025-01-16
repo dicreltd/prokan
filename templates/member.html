@@ -8,12 +8,13 @@
     <tr><th>プロジェクト</th><td>{{member.project.title}}</td></tr>
     <tr><th>ユーザ名</th><td>{{member.user.uname}}</td></tr>
 </table>
+{% if member.user.uid == session.uid or session.uid == 1 %}
 <div class="operation">
     <form method="post" action="/member_del/{{member.mid}}">
     <input type="submit" value="解除">
     </form>
 </div>
-
+{% endif %}
 <a href="/project/{{member.pid}}" class="btn">プロジェクトに戻る</a>
 
 {% endblock %}

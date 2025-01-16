@@ -335,6 +335,11 @@ def regist_post():
     uname = request.form['uname']
     upass = request.form['upass']
 
+    user = User.query.filter(User.uname == uname).first()
+    if user != None:
+        flash('既にこの名前のユーザは登録されています：' + uname)
+        return redirect(f"/regist")    
+
     u = User(uname,upass)
     db.session.add(u)
     db.session.commit()
@@ -447,6 +452,25 @@ def prcomment_post(prid):
     db.session.commit()
     flash('講師コメント更新')
     return redirect(f"/preport/{prid}")
+
+@app.post('/passchange')
+def passchange():
+    if "uid" not in session:
+        return redirect(f"/preport")
+
+    upass1 = request.form['upass1']
+    upass2 = request.form['upass2']
+    
+    if upass1 != upass2 :
+        flash('入力したパスワードと確認のパスワードが違います')
+        return redirect(f"/preport")
+
+    row = User.query.get_or_404(session['uid'])
+    row.upass = upass1
+
+    db.session.commit()
+    flash('パスワードを変更しました')
+    return redirect(f"/preport")
 
 
 if __name__ == "__main__":
