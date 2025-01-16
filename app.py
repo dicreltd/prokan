@@ -139,7 +139,8 @@ def project_post(pid):
     row.desc = request.form['desc']
     row.category = request.form['category']
     db.session.commit()
-    return redirect(f"/")
+    flash('更新しました')
+    return redirect(f"/project/<pid>")
 
 @app.get('/project_add')
 def project_add():
@@ -236,7 +237,8 @@ def plan_post(planid):
     row.pbody = request.form['pbody'];
     row.plan_at = datetime.now()
     db.session.commit()
-    return redirect(f"/project/{row.pid}")
+    flash('更新しました')
+    return redirect(f"/plan/{row.planid}")
 
 @app.get('/plan_add/<pid>')
 def plan_add_get(pid):
@@ -264,6 +266,7 @@ def plan_add_post(pid):
     )
     db.session.add(row)
     db.session.commit()
+    flash('計画を追加しました')
     return redirect(f"/project/{pid}")
 
 @app.get('/preport')
