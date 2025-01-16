@@ -140,7 +140,7 @@ def project_post(pid):
     row.category = request.form['category']
     db.session.commit()
     flash('更新しました')
-    return redirect(f"/project/<pid>")
+    return redirect(f"/project/{pid}")
 
 @app.get('/project_add')
 def project_add():

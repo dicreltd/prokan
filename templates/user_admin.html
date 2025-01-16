@@ -4,6 +4,10 @@
 
 <h1>ユーザ管理</h1>
 
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
 <table id="list">
     <tr><th>名前</th><th>プロジェクト</th><th>進捗</th></tr>
     {% for r in rows %}

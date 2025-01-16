@@ -4,6 +4,10 @@
 
 <h1>{{plan.ptitle}}</h1>
 
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
 <table class="desc">
     <tr><th>タイトル</th><td>{{plan.ptitle}}</td></tr>
     <tr><th>完成度</th><td>{{plan.prate}}%</td></tr>

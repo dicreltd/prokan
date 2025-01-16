@@ -4,6 +4,10 @@
 
 <h1>{{project.title}}</h1>
 
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
 <table class="desc">
     <tr><th>カテゴリ</th><td>{{project.category}}</td></tr>
     <tr><th>参加者</th><td>

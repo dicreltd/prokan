@@ -4,6 +4,10 @@
 
 <h1>{{plan.ptitle}}</h1>
 
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
 <form method="post" action="/plan/{{plan.planid}}">
 <table class="desc">
     <tr><th>タイトル</th><td><input type="text" name="ptitle" value="{{plan.ptitle}}"></td></tr>

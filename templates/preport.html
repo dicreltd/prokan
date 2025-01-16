@@ -4,6 +4,10 @@
 
 <h1>{{user.uname}} 進捗報告</h1>
 
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+
 <a href="/preport_add">新規登録</a>
 
 <table id="list">
