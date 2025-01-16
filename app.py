@@ -119,6 +119,9 @@ def index():
 
 @app.get('/project/<pid>')
 def project(pid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Project.query.get_or_404(pid)
     
     if is_myproject(row.pid):
@@ -128,6 +131,9 @@ def project(pid):
 
 @app.post('/project/<pid>')
 def project_post(pid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Project.query.get_or_404(pid)
     row.title = request.form['title']
     row.desc = request.form['desc']
@@ -137,11 +143,17 @@ def project_post(pid):
 
 @app.get('/project_add')
 def project_add():
+    if "uid" not in session:
+        return redirect("/login")
+
     return render_template(f"project_add.html")
 
 
 @app.post('/project_add')
 def project_add_post():
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Project(
         title = request.form['title'],
         category = request.form['category'],
@@ -162,6 +174,9 @@ def project_add_post():
 
 @app.get('/user/<uid>')
 def user(uid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = User.query.get_or_404(uid)
     return render_template("user.html", user=row)
 
@@ -197,6 +212,9 @@ def is_myproject(pid):
 
 @app.get('/plan/<planid>')
 def plan_get(planid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Plan.query.get_or_404(planid)
     if is_myproject(row.pid):
         return render_template("plan_edit.html",plan=row,user=User.query.get(session['uid']))
@@ -206,6 +224,9 @@ def plan_get(planid):
 
 @app.post('/plan/<planid>')
 def plan_post(planid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Plan.query.get_or_404(planid)
     if is_myproject(row.pid)==False:
         return redirect(r'/login')
@@ -219,6 +240,9 @@ def plan_post(planid):
 
 @app.get('/plan_add/<pid>')
 def plan_add_get(pid):
+    if "uid" not in session:
+        return redirect("/login")
+
     if is_myproject(pid)==False:
         return redirect(r'/login')
 
@@ -227,6 +251,9 @@ def plan_add_get(pid):
 
 @app.post('/plan_add/<pid>')
 def plan_add_post(pid):
+    if "uid" not in session:
+        return redirect("/login")
+
     if is_myproject(pid)==False:
         return redirect(r'/login')
 
@@ -243,6 +270,9 @@ def plan_add_post(pid):
 def preport():
     if "uid" not in session:
         return redirect("/login")
+
+    if "uid" not in session:
+        return redirect("/login")
     
     rows = Preport.query.filter(Preport.uid == session['uid']).all()
     user = User.query.get(session['uid'])
@@ -250,6 +280,9 @@ def preport():
 
 @app.get('/preport/<prid>')
 def preport_get(prid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Preport.query.get_or_404(prid)
     if row.uid != session['uid'] and session['uid'] != 1:
         return redirect("/login")
@@ -257,6 +290,9 @@ def preport_get(prid):
 
 @app.post('/preport/<prid>')
 def preport_post(prid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Preport.query.get_or_404(prid)
     if row.uid != session['uid'] and session['uid'] != 1:
         return redirect("/login")
@@ -269,10 +305,15 @@ def preport_post(prid):
 
 @app.get('/preport_add')
 def preport_add_get():
+    if "uid" not in session:
+        return redirect("/login")
     return render_template("preport_add.html")
 
 @app.post('/preport_add')
 def preport_add_post():
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Preport(
         uid = session['uid'],
         rtitle = request.form['rtitle'],
@@ -299,11 +340,17 @@ def regist_post():
 
 @app.get('/member/<mid>')
 def member(mid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Member.query.get_or_404(mid)
     return render_template(f"member.html", member=row)
 
 @app.post('/member_del/<mid>')
 def member_del(mid):
+    if "uid" not in session:
+        return redirect("/login")
+
     row = Member.query.get_or_404(mid)
     if row.uid != session['uid'] and session['uid'] != 1:
         return redirect("/login")
@@ -315,31 +362,28 @@ def member_del(mid):
 
 @app.post('/member_add/<pid>')
 def member_add(pid):
-    print("1")
+    if "uid" not in session:
+        return redirect("/login")
     user = User.query.filter(User.uname == request.form['uname']).first()
     if user == None:
         flash('ユーザが見つかりません')
         return redirect(f"/project/{pid}")    
-    print("2")
     uid = user.uid
     
     exists_member = Member.query.filter(Member.pid == pid).all()
     if len(exists_member) >= 4:
         flash('既にメンバーが４人以上居ます')
         return redirect(f"/project/{pid}")    
-    print("3")
     mem = Member.query.filter(Member.pid == pid, Member.uid == uid).first()
     if mem != None:
         flash('既に追加されています：' + user.uname)
         return redirect(f"/project/{pid}")    
 
-    print("4")
     mem = Member.query.filter(Member.uid == uid).first()
     if mem != None:
         flash('既に他のプロジェクトに参加しています。このプロジェクトに参加する場合、解除してください。')
         return redirect(f"/project/{pid}")    
 
-    print("5")
     m = Member(
         uid = uid,
         pid = pid
