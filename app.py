@@ -236,7 +236,14 @@ def plan_post(planid):
     row.prate = request.form['prate'];
     row.pbody = request.form['pbody'];
     row.plan_at = datetime.now()
+
+    row.project.updated_at = datetime.now()
+
     db.session.commit()
+
+    db.session.commit()
+
+
     flash('更新しました')
     return redirect(f"/plan/{row.planid}")
 
@@ -265,6 +272,10 @@ def plan_add_post(pid):
         pbody = request.form['pbody'],
     )
     db.session.add(row)
+
+    row = Project.query.get_or_404(pid)
+    row.updated_at = datetime.now()
+
     db.session.commit()
     flash('計画を追加しました')
     return redirect(f"/project/{pid}")
@@ -387,10 +398,10 @@ def member_add(pid):
         flash('既に追加されています：' + user.uname)
         return redirect(f"/project/{pid}")    
 
-    mem = Member.query.filter(Member.uid == uid).first()
-    if mem != None:
-        flash('既に他のプロジェクトに参加しています。このプロジェクトに参加する場合、解除してください。')
-        return redirect(f"/project/{pid}")    
+    # mem = Member.query.filter(Member.uid == uid).first()
+    # if mem != None:
+    #     flash('既に他のプロジェクトに参加しています。このプロジェクトに参加する場合、解除してください。')
+    #     return redirect(f"/project/{pid}")    
 
     m = Member(
         uid = uid,

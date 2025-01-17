@@ -12,7 +12,7 @@
 
 <form method="post" action="/plan/{{plan.planid}}">
 <table class="desc">
-    <tr><th>タイトル</th><td><input type="text" name="ptitle" value="{{plan.ptitle}}"></td></tr>
+    <tr><th>タイトル</th><td><input type="text" name="ptitle" value="{{plan.ptitle}}"  required></td></tr>
     <tr><th>完成度</th><td><input type="number" name="prate" value="{{plan.prate}}" placeholder="例：10%">%</td></tr>
     <tr><th>成果物URL</th><td><input type="text" name="url" value="{{plan.url}}"><br>GITのurlなど。成果物が無い場合には記述不要。</td></tr>
     <tr><th>内容</th><td><textarea name="pbody" >{{plan.pbody}}</textarea></td></tr>

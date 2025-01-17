@@ -10,8 +10,8 @@
 
 <form method="post" action="/preport/{{preport.prid}}">
 <table class="desc">
-    <tr><th>タイトル</th><td><input type="text" name="rtitle" value="{{preport.rtitle}}"></td></tr>
-    <tr><th>内容</th><td><textarea name="content" >{{preport.content}}</textarea></td></tr>
+    <tr><th>タイトル</th><td><input type="text" name="rtitle" value="{{preport.rtitle}}" required></td></tr>
+    <tr><th>内容</th><td><textarea name="content"   required>{{preport.content}}</textarea></td></tr>
     <tr><th>講師コメント</th><td><pre>{{preport.comment}}</pre></td></tr>
 </table>
 <div class="operation">

@@ -7,7 +7,7 @@
     <h2>マイプロジェクト</h2>
     {% if user.member %}
         <table class="plist">
-        <tr><th>タイトル</th><th>カテゴリ</th><th>登録日</th></tr>
+        <tr><th>タイトル</th><th>カテゴリ</th><th>更新日</th></tr>
         {% for m in user.member %}
         <tr>
             <td class="title"><a href="/project/{{m.project.pid}}">{{m.project.title}}</a></div>
@@ -15,6 +15,8 @@
             <td class="hi">{{m.project.updated_at.strftime('%Y/%m/%d %H:%M:%S')}}</div>
         </tr>
         {% endfor %}
+        </table>
+        <p><a href="/project_add" class="btn">新規プロジェクト作成</a></p>
     {% else %}
 
     <div>
@@ -27,7 +29,7 @@
 
     <h2>プロジェクト一覧</h2>
     <table class="plist">
-        <tr><th>タイトル</th><th>カテゴリ</th><th>登録日</th></tr>
+        <tr><th>タイトル</th><th>カテゴリ</th><th>更新日</th></tr>
         {% for r in rows %}
         <tr>
             <td class="title"><a href="/project/{{r.pid}}">{{r.title}}</a></div>

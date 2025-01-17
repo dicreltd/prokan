@@ -12,15 +12,22 @@
     <tr><th>名前</th><th>プロジェクト</th><th>進捗</th></tr>
     {% for r in rows %}
     <tr>
-        <td class="title">{{r.uname}}</div>
-            <td class="title">
+        <td>{{r.uname}}</div>
+            <td>
                 {% if r.member %}
                     {%for m in r.member%}  
-                        <a href="/project/{{m.project.pid}}">{{m.project.title}}</a>
+                        <div><a href="/project/{{m.project.pid}}">{{m.project.title}}</a></div>
                     {% endfor %}
                 {% endif %}
             </div>
-        <td class="title"><a href="/preport_admin/{{r.uid}}">進捗</a></div>
+        <td>
+            <!--<a href="/preport_admin/{{r.uid}}">進捗</a>-->
+            {% if r.preport %}
+            {% with max_pr = r.preport|sort(attribute='pr_at')|last %}
+            <div><a href="/preport/{{max_pr.prid}}">{{max_pr.rtitle}}</a></div>
+            {% endwith %}            {% endif %}
+
+        </div>
     </tr>
     {% endfor %}
 </table>
