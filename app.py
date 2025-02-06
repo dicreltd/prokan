@@ -235,11 +235,10 @@ def plan_post(planid):
     row.ptitle = request.form['ptitle'];
     row.prate = request.form['prate'];
     row.pbody = request.form['pbody'];
+    row.url = request.form['url'];
     row.plan_at = datetime.now()
 
     row.project.updated_at = datetime.now()
-
-    db.session.commit()
 
     db.session.commit()
 
